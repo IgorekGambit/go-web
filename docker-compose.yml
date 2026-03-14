@@ -1,0 +1,28 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8081:8080"
+    environment:
+      DB_DSN: postgres://user:pass@db:5432/app
+      PORT: "8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: app
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d app"]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
