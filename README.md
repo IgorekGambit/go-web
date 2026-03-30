@@ -11,11 +11,13 @@
 ## Структура
 
 ```
-cmd/app/     — точка входа
+cmd/app/          — точка входа
 internal/
-  handlers/  — контроллеры (MVC: C)
-  models/   — модели данных (MVC: M)
-  views/    — шаблоны (MVC: V)
+  db/             — фасад БД
+  handlers/       — контроллеры (MVC: C)
+  models/         — модели (MVC: M)
+  router/         — маршруты
+resources/views/  — шаблоны (MVC: V): layouts/, pages/
 ```
 
 ## Запуск

@@ -1,0 +1,23 @@
+{{define "content"}}
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-12 col-lg-9 col-xl-7">
+			<div class="card page-card">
+				<div class="card-body p-4 p-md-5">
+					<p class="text-uppercase text-primary small fw-semibold mb-2">{{.Title}}</p>
+					<h1 class="h2 mb-4">{{.Title}}</h1>
+					<p class="lead text-secondary mb-4">{{.Hint}}</p>
+					<hr class="my-4">
+					<dl class="row mb-0">
+						<dt class="col-sm-4">PostgreSQL</dt>
+						<dd class="col-sm-8"><span class="badge text-bg-light text-dark badge-db text-wrap text-start">{{.DBVersion}}</span></dd>
+						<dt class="col-sm-4 pt-3">Отрендерено</dt>
+						<dd class="col-sm-8 pt-3"><code class="small">{{.RenderedAt}}</code></dd>
+					</dl>
+				</div>
+			</div>
+			<p class="text-center text-muted small mt-3 mb-0">Bootstrap 5 · layout + страница в одном наборе шаблонов</p>
+		</div>
+	</div>
+</div>
+{{end}}
