@@ -28,6 +28,20 @@ docker compose up --build
 
 Приложение: http://localhost:8081
 
+## Отладка (Delve)
+
+Образ собран с [Delve](https://github.com/go-delve/delve). Порт **40000** — для подключения удалённого отладчика (IDE / `dlv connect`).
+
+**Обычный запуск** (по умолчанию): контейнер стартует с `./app`.
+
+**Режим отладки** — переопредели команду и пробрось порт:
+
+```bash
+docker compose run --service-ports app dlv exec ./app --headless --listen=:40000 --api-version=2
+```
+
+Либо в `docker-compose.yml` добавь сервис/профиль с `command` и `ports: - "40000:40000"`.
+
 ## Переменные окружения
 
 | Переменная | Описание | По умолчанию |
