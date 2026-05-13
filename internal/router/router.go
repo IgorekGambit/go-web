@@ -1,17 +1,23 @@
 package router
 
 import (
+	"database/sql"
 	"net/http"
 
 	"go-web/internal/handlers"
+	appmw "go-web/internal/middleware"
+	"go-web/internal/user"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
+	chimiddleware "github.com/go-chi/chi/v5/middleware"
 )
 
-func New() http.Handler {
+func New(db *sql.DB) http.Handler {
 	r := chi.NewRouter()
-	r.Use(middleware.Logger)
+	r.Use(chimiddleware.Logger)
+	if db != nil {
+		r.Use(appmw.User(user.NewService(db)))
+	}
 	routes(r)
 	return r
 }

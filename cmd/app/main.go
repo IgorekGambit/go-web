@@ -1,11 +1,13 @@
 package main
 
 import (
+	"context"
 	"log"
 	"net/http"
 	"os"
 
 	"go-web/internal/db"
+	"go-web/internal/migrate"
 	"go-web/internal/router"
 )
 
@@ -22,9 +24,12 @@ func main() {
 		if err := c.Ping(); err != nil {
 			log.Printf("db ping (возможно БД ещё не готова): %v", err)
 		}
+		if err := migrate.Up(context.Background(), c); err != nil {
+			log.Fatalf("migrate: %v", err)
+		}
 	}
 
-	r := router.New()
+	r := router.New(db.DB())
 
 	log.Printf("Listening on :%s", port)
 	http.ListenAndServe(":"+port, r)
